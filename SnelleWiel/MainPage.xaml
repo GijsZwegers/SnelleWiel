@@ -6,8 +6,30 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Grid VerticalAlignment="Top" Margin="0,0,0,-21">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFA0E4DB" Offset="0.005"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="125"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="BtInloggen" Content="Inloggen" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="281" Height="80" Foreground="#FF2EB3B6" Background="#FFE4F7F5" FontSize="48" BorderThickness="1" BorderBrush="#FF9B9B9B" IsEnabled="False" Click="BtInloggen_ClickAsync"/>
+        <TextBox x:Name="tbUser" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Height="80" Width="281" Background="White" FontSize="45" TextChanged="TbUser_TextChanged"/>
+        <PasswordBox x:Name="pbPass" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="81" Width="281" FontSize="58" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Background="White"/>
+        <Image Source="Assets/TruckImage.png" Grid.Column="1" Grid.Row="1"/>
     </Grid>
 </Page>

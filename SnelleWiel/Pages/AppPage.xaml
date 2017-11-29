@@ -1,0 +1,48 @@
+﻿<Page
+    x:Class="SnelleWiel.Pages.AppPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SnelleWiel.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ListView x:Name="lvOrders" Grid.Row="1">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="grOrders">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            
+        </ListView>
+        <Maps:MapControl
+       x:Name="MapControl1"  
+       MapServiceToken="oGdzgATPQ13YFGUucQSf~5pSwjiQ3EKxfiqyDUPfk4Q~Aphycm_cASc_MHTChozchWdk-qCFDOpfpvDf1O7BbuP2kgNF-XRlOy1kcaNu1G2S" ZoomLevelChanged="MapControl1_ZoomLevelChanged"/>
+        <Slider Grid.Row="0" x:Name="mySlider" Orientation="Vertical" HorizontalAlignment="Right" Height="211" Width="45" Margin="0,0,10,0" Minimum="0" Maximum="20" Value="6" ValueChanged="ZoomValueChanged" Foreground="SteelBlue"/>
+    </Grid>
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal" Opacity="0.5">
+            <AppBarButton x:Name="LocateMe" Label="locate me" Icon="Target" Click="LocateMe_Click"/>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
