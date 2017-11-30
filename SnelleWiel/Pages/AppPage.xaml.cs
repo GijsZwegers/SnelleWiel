@@ -33,8 +33,6 @@ namespace SnelleWiel.Pages
         dynamic OphaalAdress;
         dynamic AfhaalAdress;
         dynamic Orders;
-        double lat;
-        double lng;
         ObservableCollection<Order> orderslist = new ObservableCollection<Order>();
         ObservableCollection<Afleveradres> orderAfleverAdres = new ObservableCollection<Afleveradres>();
         ObservableCollection<Ophaaladres> orderOphaalAdres = new ObservableCollection<Ophaaladres>();
@@ -170,13 +168,18 @@ namespace SnelleWiel.Pages
             // Show above the MapIcon  
             mapIconAflever.Title = "Afhaal Adres";
             // Setting up MapIcon location  
-            mapIconAflever.Location = new Geopoint(new BasicGeoposition()
+            try
             {
-                //Latitude = geoposition.Coordinate.Latitude, [Don't use]  
-                //Longitude = geoposition.Coordinate.Longitude [Don't use]  
-                Latitude = AfhaalAdress.results[0].geometry.location.lat,
-                Longitude = AfhaalAdress.results[0].geometry.location.lng
-            });
+                mapIconAflever.Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = AfhaalAdress.results[0].geometry.location.lat,
+                    Longitude = AfhaalAdress.results[0].geometry.location.lng
+                });
+            }
+            catch
+            {
+                
+            }
             // Positon of the MapIcon  
             mapIconAflever.NormalizedAnchorPoint = new Point(0.5, 0.5);
             MapControl1.MapElements.Add(mapIconAflever);
@@ -188,13 +191,17 @@ namespace SnelleWiel.Pages
             // Show above the MapIcon  
             mapIconOphaal.Title = "Ophaal Adres";
             // Setting up MapIcon location  
+            try { 
             mapIconOphaal.Location = new Geopoint(new BasicGeoposition()
-            {
-                //Latitude = geoposition.Coordinate.Latitude, [Don't use]  
-                //Longitude = geoposition.Coordinate.Longitude [Don't use]  
+            { 
                 Latitude = OphaalAdress.results[0].geometry.location.lat,
                 Longitude = OphaalAdress.results[0].geometry.location.lng
             });
+            }
+            catch
+            {
+                
+            }
             // Positon of the MapIcon  
             mapIconOphaal.NormalizedAnchorPoint = new Point(0.5, 0.5);
             MapControl1.MapElements.Add(mapIconOphaal);
@@ -205,16 +212,22 @@ namespace SnelleWiel.Pages
             lvOrderAfhaalAdres.ItemsSource = Order.afleveradres;
             lvOrderOphaalAdres.Visibility = Visibility.Visible;
             lvOrderAfhaalAdres.Visibility = Visibility.Visible;
+            btReturnToOrders.Visibility = Visibility.Visible;
         }
 
         private void spOphaalAdres_Tapped(object sender, TappedRoutedEventArgs e)
         {
             StackPanel send = sender as StackPanel;
             Ophaaladres test = send.Tag as Ophaaladres;
-            MapControl1.Center = new Geopoint(new BasicGeoposition() {
-                Latitude = OphaalAdress.results[0].geometry.location.lat,
-                Longitude = OphaalAdress.results[0].geometry.location.lng
-            });
+            try
+            {
+                MapControl1.Center = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = OphaalAdress.results[0].geometry.location.lat,
+                    Longitude = OphaalAdress.results[0].geometry.location.lng
+                });
+            }
+            catch { }
 
         }
 
@@ -222,11 +235,23 @@ namespace SnelleWiel.Pages
         {
             StackPanel send = sender as StackPanel;
             Afleveradres test = send.Tag as Afleveradres;
-            MapControl1.Center = new Geopoint(new BasicGeoposition()
+            try
             {
-                Latitude = AfhaalAdress.results[0].geometry.location.lat,
-                Longitude = AfhaalAdress.results[0].geometry.location.lng
-            });
+                MapControl1.Center = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = AfhaalAdress.results[0].geometry.location.lat,
+                    Longitude = AfhaalAdress.results[0].geometry.location.lng
+                });
+            }
+            catch { }
+        }
+
+        private void btReturnToOrders_Click(object sender, RoutedEventArgs e)
+        {
+            lvOrderOphaalAdres.Visibility = Visibility.Collapsed;
+            lvOrderAfhaalAdres.Visibility = Visibility.Collapsed;
+            lvOrders.Visibility = Visibility.Visible;
+            btReturnToOrders.Visibility = Visibility.Collapsed;
         }
     }
 }
