@@ -17,6 +17,9 @@ using Windows.Devices.Geolocation;
 using Windows.Storage.Streams;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using SnelleWiel.Classes;
+using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -27,16 +30,43 @@ namespace SnelleWiel.Pages
     /// </summary>
     public sealed partial class AppPage : Page
     {
+        dynamic OphaalAdress;
+        dynamic AfhaalAdress;
+        dynamic Orders;
+        double lat;
+        double lng;
+        ObservableCollection<Order> orderslist = new ObservableCollection<Order>();
+        ObservableCollection<Afleveradres> orderAfleverAdres = new ObservableCollection<Afleveradres>();
+        ObservableCollection<Ophaaladres> orderOphaalAdres = new ObservableCollection<Ophaaladres>();
         Geolocator geolocator;
         public AppPage()
         {
-            
             this.InitializeComponent();
+            GetOrders();
             MapControl1.Center = new Geopoint(new BasicGeoposition() { Latitude = 51.44083, Longitude = 5.47778 });
             MapControl1.ZoomLevel = 10;
             this.Loaded += MainPage_Loaded;
+            lvOrderAfhaalAdres.Visibility = Visibility.Collapsed;
+            lvOrderOphaalAdres.Visibility = Visibility.Collapsed;
         }
-
+        // Function to get all the orders
+        private async void  GetOrders()
+        {
+            
+            Orders =  await UrlCalls.GetOrders("4", "30-11-2017");
+            string test = Orders[0].id;
+            //Debug.WriteLine(test);
+            foreach (var Order in Orders)
+            {
+                orderslist.Add(new Order {
+                    id = (string)Order.id,
+                    order = (string)Order.order,
+                    chauffeur = (string)Order.chauffeur,
+                    date = (string)Order.date
+                });
+            }
+            lvOrders.ItemsSource = orderslist;
+        }
 
         private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
@@ -57,7 +87,7 @@ namespace SnelleWiel.Pages
                 // Locate your MapIcon  
                 mapIcon.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/my-position.png"));
                 // Show above the MapIcon  
-                mapIcon.Title = "Current Location";
+                mapIcon.Title = "Uw huidige positie";
                 // Setting up MapIcon location  
                 mapIcon.Location = new Geopoint(new BasicGeoposition()
                 {
@@ -84,6 +114,7 @@ namespace SnelleWiel.Pages
             //base.OnNavigatedTo(e);
         }
 
+        // Relocate the value of the zoombar
         private void ZoomValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (MapControl1 != null)
@@ -123,6 +154,79 @@ namespace SnelleWiel.Pages
         {
             if (MapControl1 != null)
                 mySlider.Value = sender.ZoomLevel;
+        }
+
+        // 
+        private async void StackPanel_TappedAsync(object sender, TappedRoutedEventArgs e)
+        {
+            StackPanel send = sender as StackPanel;
+            Order test = send.Tag as Order;
+            var Order = await UrlCalls.GetOrder(test.id.ToString());
+
+            AfhaalAdress = await UrlCalls.GetLangLong(Order.afleveradres[0].straat, Order.afleveradres[0].huisnr, Order.afleveradres[0].plaats, Order.afleveradres[0].postcode);
+            MapIcon mapIconAflever = new MapIcon();
+            // Locate your MapIcon  
+            mapIconAflever.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/my-position.png"));
+            // Show above the MapIcon  
+            mapIconAflever.Title = "Afhaal Adres";
+            // Setting up MapIcon location  
+            mapIconAflever.Location = new Geopoint(new BasicGeoposition()
+            {
+                //Latitude = geoposition.Coordinate.Latitude, [Don't use]  
+                //Longitude = geoposition.Coordinate.Longitude [Don't use]  
+                Latitude = AfhaalAdress.results[0].geometry.location.lat,
+                Longitude = AfhaalAdress.results[0].geometry.location.lng
+            });
+            // Positon of the MapIcon  
+            mapIconAflever.NormalizedAnchorPoint = new Point(0.5, 0.5);
+            MapControl1.MapElements.Add(mapIconAflever);
+
+            OphaalAdress = await UrlCalls.GetLangLong(Order.ophaaladres[0].straat, Order.ophaaladres[0].huisnr, Order.ophaaladres[0].plaats, Order.ophaaladres[0].postcode);
+            MapIcon mapIconOphaal = new MapIcon();
+            // Locate your MapIcon  
+            mapIconOphaal.Image = RandomAccessStreamReference.CreateFromUri(new Uri("ms-appx:///Assets/my-position.png"));
+            // Show above the MapIcon  
+            mapIconOphaal.Title = "Ophaal Adres";
+            // Setting up MapIcon location  
+            mapIconOphaal.Location = new Geopoint(new BasicGeoposition()
+            {
+                //Latitude = geoposition.Coordinate.Latitude, [Don't use]  
+                //Longitude = geoposition.Coordinate.Longitude [Don't use]  
+                Latitude = OphaalAdress.results[0].geometry.location.lat,
+                Longitude = OphaalAdress.results[0].geometry.location.lng
+            });
+            // Positon of the MapIcon  
+            mapIconOphaal.NormalizedAnchorPoint = new Point(0.5, 0.5);
+            MapControl1.MapElements.Add(mapIconOphaal);
+
+            lvOrders.Visibility = Visibility.Collapsed;
+
+            lvOrderOphaalAdres.ItemsSource = Order.ophaaladres;
+            lvOrderAfhaalAdres.ItemsSource = Order.afleveradres;
+            lvOrderOphaalAdres.Visibility = Visibility.Visible;
+            lvOrderAfhaalAdres.Visibility = Visibility.Visible;
+        }
+
+        private void spOphaalAdres_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            StackPanel send = sender as StackPanel;
+            Ophaaladres test = send.Tag as Ophaaladres;
+            MapControl1.Center = new Geopoint(new BasicGeoposition() {
+                Latitude = OphaalAdress.results[0].geometry.location.lat,
+                Longitude = OphaalAdress.results[0].geometry.location.lng
+            });
+
+        }
+
+        private void spAfleverAdres_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            StackPanel send = sender as StackPanel;
+            Afleveradres test = send.Tag as Afleveradres;
+            MapControl1.Center = new Geopoint(new BasicGeoposition()
+            {
+                Latitude = AfhaalAdress.results[0].geometry.location.lat,
+                Longitude = AfhaalAdress.results[0].geometry.location.lng
+            });
         }
     }
 }

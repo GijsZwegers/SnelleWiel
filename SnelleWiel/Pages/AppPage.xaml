@@ -16,25 +16,105 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lvOrders" Grid.Row="1">
+        <ListView x:Name="lvOrders" Grid.Row="1" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="grOrders">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="1*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
-                    </Grid>
+                    <StackPanel x:Name="spOrders" Tapped="StackPanel_TappedAsync" Tag="{Binding thisorder}" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                            <TextBlock Text="{Binding id}" Margin="25,0,25,0"/>
+                        </Border>
+                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                            <TextBlock Text="{Binding order}" Margin="25,0,25,0"/>
+                        </Border>
+                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                            <TextBlock Text="{Binding chauffeur}" Margin="25,0,25,0"/>
+                        </Border>
+                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                            <TextBlock Text="{Binding date}"  Margin="25,0,25,0"/>
+                        </Border>
+                    </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            
         </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ListView x:Name="lvOrderOphaalAdres" Grid.Row="1" Grid.Column="1" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel x:Name="spOphaalAdres"  Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Tag="{Binding thisOphaalAdress}" Tapped="spOphaalAdres_Tapped">
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding id}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding nummer}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding naam}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding straat}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding huisnr}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding plaats}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding postcode}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding telefoonnr}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding type}" Margin="25,0,25,0"/>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ListView x:Name="lvOrderAfhaalAdres" Grid.Row="1" Grid.Column="3">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel x:Name="spAfhaalAdres"  Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Tag="{Binding thisAfleverAdress}" Tapped="spAfleverAdres_Tapped">
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding id}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding nummer}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding naam}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding straat}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding huisnr}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding plaats}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding postcode}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding telefoonnr}" Margin="25,0,25,0"/>
+                            </Border>
+                            <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
+                                <TextBlock Text="{Binding type}" Margin="25,0,25,0"/>
+                            </Border>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
         <Maps:MapControl
        x:Name="MapControl1"  
        MapServiceToken="oGdzgATPQ13YFGUucQSf~5pSwjiQ3EKxfiqyDUPfk4Q~Aphycm_cASc_MHTChozchWdk-qCFDOpfpvDf1O7BbuP2kgNF-XRlOy1kcaNu1G2S" ZoomLevelChanged="MapControl1_ZoomLevelChanged"/>
