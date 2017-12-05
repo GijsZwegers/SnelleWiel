@@ -16,26 +16,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="lvOrders" Grid.Row="1" >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel x:Name="spOrders" Tapped="StackPanel_TappedAsync" Tag="{Binding thisorder}" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
-                            <TextBlock Text="{Binding id}" Margin="25,0,25,0"/>
-                        </Border>
-                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
-                            <TextBlock Text="{Binding order}" Margin="25,0,25,0"/>
-                        </Border>
-                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
-                            <TextBlock Text="{Binding chauffeur}" Margin="25,0,25,0"/>
-                        </Border>
-                        <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
-                            <TextBlock Text="{Binding date}"  Margin="25,0,25,0"/>
-                        </Border>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
@@ -53,7 +33,7 @@
             <ListView x:Name="lvOrderOphaalAdres" Grid.Row="1" Grid.Column="1" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel x:Name="spOphaalAdres"  Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Tag="{Binding thisOphaalAdress}" Tapped="spOphaalAdres_Tapped">
+                        <StackPanel x:Name="spOphaalAdres"  Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Tag="{Binding thisOphaalAdress}">
                             <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
                                 <TextBlock Text="{Binding id}" Margin="25,0,25,0"/>
                             </Border>
@@ -88,7 +68,7 @@
             <ListView x:Name="lvOrderAfhaalAdres" Grid.Row="1" Grid.Column="3">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel x:Name="spAfhaalAdres"  Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Tag="{Binding thisOphaalAdress}" Tapped="spAfleverAdres_Tapped">
+                        <StackPanel x:Name="spAfhaalAdres"  Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Stretch" Tag="{Binding thisOphaalAdress}">
                             <Border BorderBrush="Gray" Background="LightGray" BorderThickness="1">
                                 <TextBlock Text="{Binding id}" Margin="25,0,25,0"/>
                             </Border>

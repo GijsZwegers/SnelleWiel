@@ -25,7 +25,11 @@ namespace SnelleWiel.Pages
         public OptionPage()
         {
             this.InitializeComponent();
-            fContent.Navigate(typeof(OrderPage));
+            fContent.Navigate(typeof(OrderPage), this.fContent);
+        }
+        public void NavigateAppPage(string id)
+        {
+            fContent.Navigate(typeof(AppPage));
         }
 
     }
