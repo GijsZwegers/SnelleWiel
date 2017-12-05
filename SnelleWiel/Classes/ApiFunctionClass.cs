@@ -27,6 +27,6 @@ namespace SnelleWiel.api
         public static T DeserializeJSon<T>(string Json)
         {
             return JsonConvert.DeserializeObject<T>(Json);
-        }
+        }    
     }
 }

@@ -51,6 +51,7 @@ namespace SnelleWiel.Classes
     public class Ophaaladres
     {
         public Ophaaladres thisOphaalAdress { get { return this; } }
+        public string ophaaladresnummer { get { return nummer; } }
         public string id { get; set; }
         public string nummer { get; set; }
         public string naam { get; set; }
@@ -65,6 +66,7 @@ namespace SnelleWiel.Classes
     public class Afleveradres
     {
         public Afleveradres thisAfleverAdress { get { return this; } }
+        public string afleveradresnummer { get { return nummer; } }
         public string id { get; set; }
         public string nummer { get; set; }
         public string naam { get; set; }

@@ -36,7 +36,7 @@ namespace SnelleWiel
             var test = await UrlCalls.GetUser(tbUser.Text, pbPass.Password);
             if (test.success == true)
             {
-                this.Frame.Navigate(typeof(Pages.AppPage));
+                this.Frame.Navigate(typeof(Pages.OptionPage));
             }
             else
             {

@@ -98,7 +98,7 @@ namespace SnelleWiel.Pages
                 mapIcon.NormalizedAnchorPoint = new Point(0.5, 0.5);
                 MapControl1.MapElements.Add(mapIcon);
                 // Showing in the Map  
-                await MapControl1.TrySetViewAsync(mapIcon.Location, 18D, 0, 0, MapAnimationKind.Bow);
+                //await MapControl1.TrySetViewAsync(mapIcon.Location, 18D, 0, 0, MapAnimationKind.Bow);
 
                 // Disable the ProgreesBar  
                 // LocateMe.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
@@ -133,7 +133,7 @@ namespace SnelleWiel.Pages
                     timeout: TimeSpan.FromSeconds(10));
                 await MapControl1.TrySetViewAsync(geoposition.Coordinate.Point, 18D);
                 mySlider.Value = MapControl1.ZoomLevel;
-                LocateMe.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+                //LocateMe.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             }
             catch (UnauthorizedAccessException)
             {
@@ -205,14 +205,9 @@ namespace SnelleWiel.Pages
             // Positon of the MapIcon  
             mapIconOphaal.NormalizedAnchorPoint = new Point(0.5, 0.5);
             MapControl1.MapElements.Add(mapIconOphaal);
+            CollapseOrders(Order);
 
-            lvOrders.Visibility = Visibility.Collapsed;
 
-            lvOrderOphaalAdres.ItemsSource = Order.ophaaladres;
-            lvOrderAfhaalAdres.ItemsSource = Order.afleveradres;
-            lvOrderOphaalAdres.Visibility = Visibility.Visible;
-            lvOrderAfhaalAdres.Visibility = Visibility.Visible;
-            btReturnToOrders.Visibility = Visibility.Visible;
         }
 
         private void spOphaalAdres_Tapped(object sender, TappedRoutedEventArgs e)
@@ -247,6 +242,20 @@ namespace SnelleWiel.Pages
         }
 
         private void btReturnToOrders_Click(object sender, RoutedEventArgs e)
+        {
+            CollapseOphaalAfhaal();
+        }
+        private void CollapseOrders(dynamic Order)
+        {
+            lvOrders.Visibility = Visibility.Collapsed;
+
+            lvOrderOphaalAdres.ItemsSource = Order.ophaaladres;
+            lvOrderAfhaalAdres.ItemsSource = Order.afleveradres;
+            lvOrderOphaalAdres.Visibility = Visibility.Visible;
+            lvOrderAfhaalAdres.Visibility = Visibility.Visible;
+            btReturnToOrders.Visibility = Visibility.Visible;
+        }
+        private  void CollapseOphaalAfhaal()
         {
             lvOrderOphaalAdres.Visibility = Visibility.Collapsed;
             lvOrderAfhaalAdres.Visibility = Visibility.Collapsed;

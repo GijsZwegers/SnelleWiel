@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnelleWiel", "SnelleWiel\SnelleWiel.csproj", "{92BFE75E-DDE3-4E5A-B714-6A62D0BCF4A0}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -33,6 +35,12 @@ Global
 		{92BFE75E-DDE3-4E5A-B714-6A62D0BCF4A0}.Release|x86.ActiveCfg = Release|x86
 		{92BFE75E-DDE3-4E5A-B714-6A62D0BCF4A0}.Release|x86.Build.0 = Release|x86
 		{92BFE75E-DDE3-4E5A-B714-6A62D0BCF4A0}.Release|x86.Deploy.0 = Release|x86
+		{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}.Debug|ARM.ActiveCfg = Debug
+		{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}.Debug|x64.ActiveCfg = Debug
+		{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}.Debug|x86.ActiveCfg = Debug
+		{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}.Release|ARM.ActiveCfg = Release
+		{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}.Release|x64.ActiveCfg = Release
+		{8D5F63E2-E3D7-402B-81AD-F86F99CEE44A}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
