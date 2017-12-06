@@ -53,12 +53,13 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid HorizontalAlignment="Stretch" Tapped="Grid_Tapped" Tag="{Binding thisorder}" >
+                    <Grid HorizontalAlignment="Stretch" Tapped="Grid_Tapped" Tag="{Binding id}" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
+                        
                         <TextBlock Text="{Binding id}" Grid.Column="0" HorizontalAlignment="Stretch" TextAlignment="Center"/>
                         <TextBlock Text="{Binding order}" Grid.Column="1" HorizontalAlignment="Stretch" TextAlignment="Center"/>
                         <TextBlock Text="{Binding chauffeur}" Grid.Column="2" HorizontalAlignment="Stretch" TextAlignment="Center"/>

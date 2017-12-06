@@ -23,6 +23,8 @@ namespace SnelleWiel.Classes
         public List<Ophaaladres> ophaaladres { get; set; }
         public List<Afleveradres> afleveradres { get; set; }
         public List<Result> results { get; set; }
+        public Order order { get; set; }
+
 
     }
     public class Result
@@ -41,16 +43,27 @@ namespace SnelleWiel.Classes
 
     public class Order
     {
-        public Order thisorder { get { return this; } }
+        public Addresses addresses { get; set; }
+        public List<Info> info { get; set; }
+        public List<Producten> producten { get; set; }
         public string id { get; set; }
         public string order { get; set; }
         public string chauffeur { get; set; }
         public string date { get; set; }
+
+    }
+
+    public class Producten
+    {
+        public string id { get; set; }
+        public string orderref { get; set; }
+        public string nummer { get; set; }
+        public string naam { get; set; }
+        public string aantal { get; set; }
     }
 
     public class Ophaaladres
     {
-        public Ophaaladres thisOphaalAdress { get { return this; } }
         public string ophaaladresnummer { get { return nummer; } }
         public string id { get; set; }
         public string nummer { get; set; }
@@ -76,6 +89,26 @@ namespace SnelleWiel.Classes
         public string postcode { get; set; }
         public string telefoonnr { get; set; }
         public string type { get; set; }
+    }
+    public class Info
+    {
+        public string id { get; set; }
+        public string orderref { get; set; }
+        public string ophaaltijdvanaf { get; set; }
+        public string aflevertijdtot { get; set; }
+        public string opdrachtgever { get; set; }
+        public string zender { get; set; }
+        public string ophaaladres { get; set; }
+        public string afleveradres { get; set; }
+        public string kg { get; set; }
+        public string m3 { get; set; }
+        public string status { get; set; }
+    }
+
+    public class Addresses
+    {
+        public List<Ophaaladres> ophaaladres { get; set; }
+        public List<Afleveradres> afleveradres { get; set; }
     }
 
 }

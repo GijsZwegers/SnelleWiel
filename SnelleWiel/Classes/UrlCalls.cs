@@ -32,10 +32,10 @@ namespace SnelleWiel.Classes
             return ApiFunctionClass.DeserializeJSon<RootObject>(await ApiFunctionClass.PostDataAsync("https://stefvanderwel.nl/snellewiel/index.php/API/order", parameters));
         }
 
-        public static async Task<RootObject> GetLangLong(string straat, string huisnr, string plaats, string postcode)
+        public static async Task<dynamic> GetLangLong(string straat, string huisnr, string plaats, string postcode)
         {
             string test = "https://maps.googleapis.com/maps/api/geocode/json?address=" + straat + "+" + huisnr + "+" + plaats + "+" + postcode;
-            return ApiFunctionClass.DeserializeJSon<RootObject>(await ApiFunctionClass.GetDataAsync(test));
+            return ApiFunctionClass.DeserializeJSon<dynamic>(await ApiFunctionClass.GetDataAsync(test));
         }
 
         public static async Task<User> GetUserName()
